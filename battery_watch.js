@@ -1,11 +1,7 @@
-// replace sleep 30 w/ sleep 60
-// remove console.log
-// change levels
-
 var exec = require('child_process').exec;
 
-var BATTERY_LIMIT_WARNING = 60;
-var BATTERY_LIMIT_SLEEP = 58;
+var BATTERY_LIMIT_WARNING = 45;
+var BATTERY_LIMIT_SLEEP = 40;
 
 var warning_showed = false;
 var final_warning_showed = false;
@@ -15,10 +11,10 @@ var i = 0;
 setInterval(function(){
   
 
-  console.log('-', i);
+  console.log('Check', i);
   isAwake(function(awake){
     if (awake) {
-      console.log('awake');
+      console.log('Awake');
       getBatteryStatus(function(error, percentage, isDischarging){
         console.log(isDischarging ? 'discharging' : 'NOT discharging', percentage);
         if (!error && isDischarging) {
