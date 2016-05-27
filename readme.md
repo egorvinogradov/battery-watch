@@ -3,11 +3,17 @@ battery-watch
 
 Puts Mac into sleep mode when battery reaches certain level. Requires nodejs.
 
-1. Install sleepwatcher `brew install sleepwatcher`
-2. Change path to the startup script in `com.BatteryWatch.plist` if necessary
-3. Move `com.BatteryWatch.plist` into `~/Library/LaunchAgents`
-4. Run script manually in the background
+* Install sleepwatcher `brew install sleepwatcher`
+* Change path to the startup script in `com.BatteryWatch.plist` if necessary
+* Move `com.BatteryWatch.plist` into `~/Library/LaunchAgents`
+* Install forever
 ```shell
-cd battery-watch
-./battery_watch_startup.sh &
+npm install forever -g
+cd cd battery-watch
+npm install forever-monitor
 ```
+* Run startup script manually `./battery_watch_startup.sh`
+
+
+
+To kill battery-watch run `node battery_watch_stop.js `
