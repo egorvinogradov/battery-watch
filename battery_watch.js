@@ -4,8 +4,8 @@
 
 var exec = require('child_process').exec;
 
-var BATTERY_LIMIT_WARNING = 45;
-var BATTERY_LIMIT_SLEEP = 44;
+var BATTERY_LIMIT_WARNING = 60;
+var BATTERY_LIMIT_SLEEP = 58;
 
 var warning_showed = false;
 var final_warning_showed = false;
