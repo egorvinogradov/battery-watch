@@ -1,3 +1,7 @@
+// replace sleep 30 w/ sleep 60
+// remove console.log
+// change levels
+
 var exec = require('child_process').exec;
 
 var BATTERY_LIMIT_WARNING = 45;
@@ -6,8 +10,12 @@ var BATTERY_LIMIT_SLEEP = 44;
 var warning_showed = false;
 var final_warning_showed = false;
 
+var i = 0;
+
 setInterval(function(){
-  console.log('-');
+  
+
+  console.log('-', i);
   isAwake(function(awake){
     if (awake) {
       console.log('awake');
@@ -20,7 +28,7 @@ setInterval(function(){
           }
           else if (percentage <= BATTERY_LIMIT_SLEEP && !final_warning_showed) {
             final_warning_showed = true;
-            exec('osascript -e \'display notification "Putting computer to sleep in 1 minute"\'; sleep 30; pmset sleepnow', function(){
+            exec('osascript -e \'display notification "Putting computer to sleep in 1 minute"\'; sleep 60; pmset sleepnow', function(){
               warning_showed = false;
               final_warning_showed = false;
             });
@@ -33,6 +41,8 @@ setInterval(function(){
       });
     }
   });
+
+  i++;
 
 }, 10 * 1000);
 
