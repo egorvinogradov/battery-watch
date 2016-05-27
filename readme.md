@@ -14,6 +14,5 @@ npm install forever-monitor
 ```
 * Run startup script manually `./battery_watch_startup.sh`
 
-=============
 
 To kill `battery-watch` run `node battery_watch_stop.js`
