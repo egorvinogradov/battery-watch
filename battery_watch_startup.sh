@@ -1,12 +1,13 @@
 #!/bin/bash
 
-dir=".battery_watch"
+config_dir=".battery_watch"
 
 if [[ ! -e $dir ]]; then
   mkdir $dir
 fi
 
-sleepwatcher -s "echo 'BATTERY_WATCH=0' > ~/$dir/status" &
-sleepwatcher -w "echo 'BATTERY_WATCH=1' > ~/$dir/status" &
+nohup /usr/local/sbin/sleepwatcher -s "echo 'BATTERY_WATCH=0' > ~/$config_/status" > /dev/null 2>&1 &
+nohup /usr/local/sbin/sleepwatcher -w "echo 'BATTERY_WATCH=1' > ~/$config_/status" > /dev/null 2>&1 &
 
-forever start battery_watch.js
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+forever start $script_dir/battery_watch.js

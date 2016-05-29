@@ -1,3 +1,5 @@
+// TODO: split out battery watch and lid close watch into separate background deamons
+
 var exec = require('child_process').exec;
 
 var BATTERY_LIMIT_WARNING = 45;
@@ -10,8 +12,9 @@ var i = 0;
 
 setInterval(function(){
   
-
   console.log('Check', i);
+  i++;
+
   isAwake(function(awake){
     if (awake) {
       console.log('Awake');
@@ -38,9 +41,7 @@ setInterval(function(){
     }
   });
 
-  i++;
-
-}, 10 * 1000);
+}, 20 * 1000);
 
 
 function isAwake(callback){
@@ -67,3 +68,26 @@ function getBatteryStatus(callback){
     }
   });
 }
+
+
+
+// TODO: move to a separate daemon
+
+function checkIfLidIsClosed(callback){
+  exec('ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | head -1', function(error, stdout, stderr){
+    try {
+      callback(/\s+yes$/i.test(stdout.trim()));
+    }
+    catch(e){
+      callback(false);
+    }
+  });
+}
+
+setInterval(function(){
+  checkIfLidIsClosed(function(closed){
+    if (closed) {
+      exec('pmset sleepnow');
+    }
+  });
+}, 1 * 1000);

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
    <key>Label</key>
-   <string>com.user.loginscript</string>
+   <string>com.BatteryWatch</string>
    <key>Program</key>
-   <string>/path/to/executable/script.sh</string>
+   <string>~/repos/battery-watch/battery_watch_startup.sh</string>
    <key>RunAtLoad</key>
    <true/>
 </dict>
